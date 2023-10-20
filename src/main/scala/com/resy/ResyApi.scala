@@ -90,7 +90,7 @@ object ResyApi extends Logging {
     ws.url(url)
       .withHttpHeaders(createHeaders(resyKeys): _*)
       .get
-      .map(_.body)(system.dispatcher)
+      .map(_.body)(system.dispatcher) 
   }
 
   private def sendPostRequest(
@@ -109,7 +109,8 @@ object ResyApi extends Logging {
         createHeaders(resyKeys) ++ Seq(
           "Content-Type" -> "application/x-www-form-urlencoded",
           "Origin"       -> "https://widgets.resy.com",
-          "Referer"      -> "https://widgets.resy.com/"
+          "Referer"      -> "https://widgets.resy.com/",
+          "User-Agent"   -> "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"         
         ): _*
       )
       .post(post)
@@ -129,3 +130,4 @@ object ResyApi extends Logging {
     }
   }
 }
+

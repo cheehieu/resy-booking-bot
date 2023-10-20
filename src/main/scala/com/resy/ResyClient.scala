@@ -149,6 +149,8 @@ class ResyClient(resyApi: ResyApi) extends Logging {
     millisToRetry: Long,
     dateTimeStart: Long
   ): Try[String] = {
+    logger.info(s"retryFindReservations(): $date, $partySize, $venueId, $resTimeTypes, $millisToRetry, $dateTimeStart")
+
     val reservationTimesResp: Try[ReservationMap] = Try {
       val response = Await.result(
         awaitable = resyApi.getReservations(date, partySize, venueId),
@@ -156,6 +158,7 @@ class ResyClient(resyApi: ResyApi) extends Logging {
       )
 
       logger.debug(s"URL Response: $response")
+      logger.info(s"URL Response: $response")
 
       // Searching this JSON list structure...
       // {"results": {"venues": [{"slots": [{...}, {...}]}]}}
